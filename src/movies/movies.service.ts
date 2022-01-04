@@ -36,4 +36,6 @@ export class MoviesService {
         this.deleteOne(id);
         this.movies.push({...movie, ...updateData});
     }
+
+    search(){}
 }
