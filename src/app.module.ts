@@ -1,13 +1,15 @@
 import { Module } from '@nestjs/common';
 import { MoviesModule } from './movies/movies.module';
-import { ConfigModule } from '@nestjs/config';
+import { AppController } from './app.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from './users/entities/user.entity';
 import { UsersModule } from './users/users.module';
-import { User } from './users/entities/users.entity';
+import { ConfigModule } from '@nestjs/config';
+
 @Module({
-  imports: [MoviesModule, 
+  imports: [MoviesModule, UsersModule,
     ConfigModule.forRoot({
-      envFilePath:['.development.env'],
+      envFilePath:'.env.development',
     }),
     TypeOrmModule.forRoot({
       type : "mysql",
@@ -18,9 +20,9 @@ import { User } from './users/entities/users.entity';
       database : process.env.DB_DATABASE,
       entities : [User],
       synchronize : true
-    }), UsersModule
+    }),  
   ],
-  controllers: [],
+  controllers: [AppController],
   providers: [],
 })
 export class AppModule {}

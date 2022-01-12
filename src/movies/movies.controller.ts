@@ -19,23 +19,22 @@ export class MoviesController {
     }
     
     @Get(":id")
-    getOne(@Param('id') mid:string):Movie {
+    getOne(@Param('id') mid:number):Movie {
         return this.moviesService.getOne(mid);
     }
 
     @Post() 
     create(@Body() movieData:CreateMovieDto) {
-        console.log(movieData)
         return this.moviesService.create(movieData);
     }
 
     @Delete(":id")
-    remove(@Param('id') mid:string) {
+    remove(@Param('id') mid:number) {
         return this.moviesService.deleteOne(mid);
     }
 
     @Patch(":id")
-    patch(@Param('id') mid:string, @Body() updateData:UpdateMovieDto) {
+    patch(@Param('id') mid:number, @Body() updateData:UpdateMovieDto) {
         return this.moviesService.update(mid, updateData);
     }
 }
