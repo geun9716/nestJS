@@ -24,6 +24,12 @@ export class UsersController {
         return this.usersService.create(user)
     }
 
+    @Post('login')
+    checkpassword(@Body() user:any) {
+        console.log(user)
+        return this.usersService.check(user.userID, user.password);
+    }
+
     @Delete(':id')
     removeOne(@Param() id:string): Promise<void>{
         return this.usersService.remove(id);
