@@ -35,6 +35,12 @@ export class UsersService {
     return result;
   }
 
+  async check(userID:string, check_password:string) {
+    const {password, ...result} = await this.usersRepository.findOne({userID:userID});
+    console.log(check_password, password)
+    console.log(await SecureInstance.compareSync(check_password, password))
+  }
+
   async update(id:string, user:UpdateUserDTO) {
     const prevUser = await this.usersRepository.findOne(id);
     let userToUpdate = {...prevUser, ...user}
